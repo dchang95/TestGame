@@ -24,17 +24,18 @@ public class GameModel
         myCurrentState = c;
     }
 
-    public GameModel(CellState[][] board, GameState state)
-    {
-        myBoard = board;
-        myCurrentState = state;
-    }
+//    public GameModel(CellState[][] board, GameState state)
+//    {
+//        myBoard = board;
+//        myCurrentState = state;
+//    }
 
     /**
      * Returns a random board
      */
-    public CellState[][] getRandomBoard(int rows, int cols)
+    public CellState[][] returnRandomBoard(int rows, int cols)
     {
+        System.out.println("Function: GameModel, getRandomBoard()");
         CellState[][] board = new CellState[rows][cols];
 
         for (int i = 0; i < board.length; i++)
@@ -49,11 +50,12 @@ public class GameModel
     }
 
     /**
-     * Checks a board for a win based on a certain Cellstate (checkedState)
+     * Checks a board for a win (All cells must be the same value)
      * Returns a GameState (PLAYING or WON)
      */
-    public GameState checkWin(CellState[][] board, CellState checkedState)
+    public GameState returnGameState(CellState[][] board)
     {
+        System.out.println("Function: GameModel, checkWin()");
         int numRows = board.length;
         int numCols = board[0].length;
 
@@ -62,7 +64,7 @@ public class GameModel
         {
             for (int col = 0; col < numCols; col++)
             {
-                if (board[row][col] != checkedState)
+                if (board[row][col] != board[0][0])
                 {
                     return GameState.PLAYING;
                 }
@@ -78,6 +80,7 @@ public class GameModel
      */
     public CellState[][] updateBoard(int rowSelect, int colSelect, CellState[][] board)
     {
+        System.out.println("Function: GameModel, updateBoard()");
         // FOR CROSS (+) MODE
         // flips tiles in a cross
         // flipTile(rowSelected, colSelected);

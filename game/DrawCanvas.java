@@ -12,13 +12,13 @@ import javax.swing.JPanel;
 
 import game.GameMain;
 
-//The GUI component that actually draws the game
+// The GUI component that actually draws the game
 class DrawCanvas extends JPanel implements MouseListener
 {
-    //need a copy of main for the update() function
+    // need a copy of main for the update() function
     GameMain      myMain;
 
-    //updates itself based on myBoard
+    // updates itself based on myBoard
     CellState[][] myBoard;
 
     public DrawCanvas(GameMain main)
@@ -29,16 +29,13 @@ class DrawCanvas extends JPanel implements MouseListener
         this.addMouseListener(this);
     }
 
+    /**
+     * invoked during repaint
+     * I have no clue what this does
+     */
     @Override
     public void paintComponent(Graphics g)
     {
-        System.out.println("printing");
-        // invoke via repaint()
-        // super.paintComponent(g); // fill background
-        // setBackground(Color.WHITE); // set its background color
-
-        // Draw the state of all the cells if they are not empty
-
         Graphics2D g2d = (Graphics2D)g;
 
         for (int row = 0; row < GameMain.ROWS; row++)
@@ -53,6 +50,7 @@ class DrawCanvas extends JPanel implements MouseListener
                 {
                     g2d.setColor(Color.BLACK);
                     g2d.fillRect(x1, y1, x2, y2);
+                    // g2d.fillRoundRect(x1, y1, x2, y2, 5, 5);
 
                 }
                 else if (myBoard[row][col] == CellState.WHITE)
@@ -62,13 +60,14 @@ class DrawCanvas extends JPanel implements MouseListener
                 }
             }
         }
-
-        // Print status-bar message
-
     }
 
+    /**
+     * redraws the board
+     */
     public void update(CellState[][] board)
     {
+        System.out.println("Function: DrawCanvas, update()");
         myBoard = board;
         this.repaint();
     }
@@ -76,20 +75,6 @@ class DrawCanvas extends JPanel implements MouseListener
     @Override
     public void mouseClicked(MouseEvent e)
     {
-        System.out.println("Action: DrawCanvas, Mouse Click");
-        int mouseX = e.getX();
-        int mouseY = e.getY();
-
-        // Get the row and column clicked
-
-        int rowSelected = mouseY / GameMain.CELL_SIZE;
-        int colSelected = mouseX / GameMain.CELL_SIZE;
-
-        //call hierarchy: GameMain.updateGame -> GameGui.update -> DrawCanvas.update
-        myMain.updateGame(rowSelected, colSelected);
-
-        // Refresh the drawing canvas
-        // repaint(); // Call-back paintComponent().
 
     }
 
@@ -98,9 +83,30 @@ class DrawCanvas extends JPanel implements MouseListener
     {
     }
 
+    /**
+     * Determines which cell should be updated
+     * Used mouseReleased because mouseClicked was finnicky (if you move your mouse at all during the click it does not register)
+     * Must handle rowSelect/colSelect going out of the frame
+     * 
+     * @param e
+     */
     @Override
     public void mouseReleased(MouseEvent e)
     {
+        int mouseX = e.getX();
+        int mouseY = e.getY();
+
+        int rowSelected = mouseY / GameMain.CELL_SIZE;
+        int colSelected = mouseX / GameMain.CELL_SIZE;
+
+        System.out.println("Action: DrawCanvas, mouseReleased(), rowSelected: " + rowSelected + ", colSelected: "
+                + colSelected);
+
+        // test if rowSelected/colSelected are within the frame
+        if (rowSelected >= 0 && colSelected >= 0 && rowSelected < myBoard.length && colSelected < myBoard[0].length)
+        {
+            myMain.updateGame(rowSelected, colSelected);
+        }
     }
 
     @Override

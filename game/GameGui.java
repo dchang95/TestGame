@@ -32,18 +32,19 @@ public class GameGui extends JFrame
 
         this.setLayout(new BorderLayout());
         this.add(canvas, BorderLayout.CENTER);
-        this.add(statusBar, BorderLayout.PAGE_END); // same as SOUTH
+        this.add(statusBar, BorderLayout.SOUTH);
         
 
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.pack(); // pack all the components in this JFrame
-        this.setTitle("Tic Tac Toe");
-        this.setVisible(true); // show this JFrame
+        this.pack();
+        this.setTitle("This game is impossible WuTFace");
+        this.setVisible(true); 
 
     }
 
     public void update(CellState[][] board, GameState currentState)
     {
+        System.out.println("Function: GameGui, Update()");
         canvas.update(board);
         if (currentState == GameState.PLAYING)
         {
