@@ -24,7 +24,7 @@ public class GameMain
 
     public enum GameState
     {
-        PLAYING, WON
+        PLAYING, WON, MENU
     }
 
     // Represents the State of each cell
@@ -39,6 +39,8 @@ public class GameMain
     private GameModel game;
 
     private GameGui   gameGui;
+    
+    //private Button button;
 
     /**
      * Creates a game Model
@@ -48,6 +50,9 @@ public class GameMain
      */
     public GameMain()
     {
+    	// How to make menu?
+//        button = new Button();
+//        button.setVisible(true);
         game = new GameModel(ROWS, COLS, GameState.PLAYING);
         cleanBoard(); // initialize the game board contents and game variables
         gameGui = new GameGui(this);
