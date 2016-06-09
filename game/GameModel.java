@@ -5,8 +5,9 @@ import game.GameMain.GameState;
 
 // The GameModel class is our Model in the MVC framework
 // It contains our board and our current state
-// It contains functions that modify our board and our current state
 // It contains functions that analyze our board for wins
+// GameModel does NOT modify itself
+
 public class GameModel
 {
     private int           myRows;
@@ -24,11 +25,11 @@ public class GameModel
         myCurrentState = c;
     }
 
-//    public GameModel(CellState[][] board, GameState state)
-//    {
-//        myBoard = board;
-//        myCurrentState = state;
-//    }
+    // public GameModel(CellState[][] board, GameState state)
+    // {
+    // myBoard = board;
+    // myCurrentState = state;
+    // }
 
     /**
      * Returns a random board
@@ -59,7 +60,7 @@ public class GameModel
         int numRows = board.length;
         int numCols = board[0].length;
 
-        // a winning board has the same cellstate for all cells
+        // a winning board has the same CellState for all cells
         for (int row = 0; row < numRows; row++)
         {
             for (int col = 0; col < numCols; col++)
@@ -70,7 +71,6 @@ public class GameModel
                 }
             }
         }
-        // can only get here if all Seeds are the same Seed
         return GameState.WON;
 
     }
@@ -80,6 +80,7 @@ public class GameModel
      */
     public CellState[][] updateBoard(int rowSelect, int colSelect, CellState[][] board)
     {
+        // we can easily implement different "modes" by creating a factory class
         System.out.println("Function: GameModel, updateBoard()");
         // FOR CROSS (+) MODE
         // flips tiles in a cross

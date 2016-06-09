@@ -13,12 +13,11 @@ import javax.swing.JPanel;
 import game.GameMain;
 
 // The GUI component that actually draws the game
+// The GUI is given a copy of main so actionlisteners can call the update() function in main
 class DrawCanvas extends JPanel implements MouseListener
 {
-    // need a copy of main for the update() function
     GameMain      myMain;
 
-    // updates itself based on myBoard
     CellState[][] myBoard;
 
     public DrawCanvas(GameMain main)
@@ -30,8 +29,7 @@ class DrawCanvas extends JPanel implements MouseListener
     }
 
     /**
-     * invoked during repaint
-     * I have no clue what this does
+     * Invoked during repaint
      */
     @Override
     public void paintComponent(Graphics g)
@@ -50,7 +48,6 @@ class DrawCanvas extends JPanel implements MouseListener
                 {
                     g2d.setColor(Color.BLACK);
                     g2d.fillRect(x1, y1, x2, y2);
-                    // g2d.fillRoundRect(x1, y1, x2, y2, 5, 5);
 
                 }
                 else if (myBoard[row][col] == CellState.WHITE)

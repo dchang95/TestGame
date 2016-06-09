@@ -3,6 +3,7 @@ package game;
 import javax.swing.SwingUtilities;
 
 // The GameMain class manages the constants, enums, and all other classes
+// Responsible for modifying GameModel
 public class GameMain
 {
     /**************************************** CONSTANTS ******************************************/
@@ -36,9 +37,11 @@ public class GameMain
 
     /**************************************** VARIABLES ******************************************/
 
-    private GameModel game;
+    private GameModel  game;
 
-    private GameGui   gameGui;
+    private GameGui    gameGui;
+
+    private DerekUskcs dereucksuscks;
 
     /**
      * Creates a game Model
@@ -47,6 +50,14 @@ public class GameMain
      * MUST be in this order
      */
     public GameMain()
+    {
+        dereucksuscks = new DerekUskcs(this);
+    }
+
+    /**
+     * Begins the game
+     */
+    public void startGame()
     {
         game = new GameModel(ROWS, COLS, GameState.PLAYING);
         cleanBoard(); // initialize the game board contents and game variables
