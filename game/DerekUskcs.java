@@ -14,6 +14,7 @@ public class DerekUskcs extends JFrame implements ActionListener
 
     public DerekUskcs(GameMain main)
     {
+        //
         myMain = main;
         start = new JButton("start game");
         start.addActionListener(this);
