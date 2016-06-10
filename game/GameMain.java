@@ -41,7 +41,7 @@ public class GameMain
 
     private GameGui    gameGui;
 
-    private DerekUskcs dereucksuscks;
+    private AllenSucks allenBad;
 
     /**
      * Creates a game Model
@@ -51,7 +51,7 @@ public class GameMain
      */
     public GameMain()
     {
-        dereucksuscks = new DerekUskcs(this);
+        allenBad = new AllenSucks(this);
     }
 
     /**
